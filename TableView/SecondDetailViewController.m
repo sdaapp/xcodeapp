@@ -49,9 +49,12 @@
     self.navigationItem.rightBarButtonItem = addButton;
     addButton.tintColor = [UIColor colorWithRed:(25/255.0) green:(200/250.0) blue:(110/255.0) alpha:1];
     
-    
+    runnersInfoOriginalFrame = CGRectMake(0, 216, 320, 238);
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [runnersInfo scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
+}
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
@@ -199,7 +202,21 @@
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    return [[self.run.videoLinks objectForKey:@"PickerItems"] count];
+    int numberOfVideoLinks = [[self.run.videoLinks objectForKey:@"PickerItems"] count];
+    
+    if (numberOfVideoLinks == 1) {
+        pickerView.hidden = YES;
+        if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
+            runnersInfo.frame = self.view.frame;
+        } else {
+            runnersInfo.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 44 - 49 - 20); // In iOS 7; the navigation bar (44 points), tab bar (49 points) and status bar (20 points) are considered areas that can display content. Modifying the frame of the text view to not be blocked by any of these. 
+        }
+    } else if (numberOfVideoLinks > 1) {
+        pickerView.hidden = NO;
+        runnersInfo.frame = runnersInfoOriginalFrame;
+    }
+    
+    return numberOfVideoLinks;
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component

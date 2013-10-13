@@ -207,7 +207,11 @@
     [aSearchBar resignFirstResponder];
     isFiltered = NO;
     aSearchBar.backgroundColor = [UIColor lightGrayColor];
-    [self.tableView setContentOffset:CGPointMake(0,-20) animated:YES];
+    if (floor(NSFoundationVersionNumber <= NSFoundationVersionNumber_iOS_6_1)) {
+        [self.tableView setContentOffset:CGPointMake(0, 44) animated:YES];
+    } else {
+        [self.tableView setContentOffset:CGPointMake(0,-20) animated:YES];
+    }
     [self.tableView reloadData];
 }
 
