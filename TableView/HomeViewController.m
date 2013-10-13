@@ -33,6 +33,10 @@
     [super viewDidLoad];
     
     [self checkReachability];
+    
+    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
+        homeTextBottomConstraint.constant = 0; // This constraint is only needed on iOS 7.
+    }
 }
 
 -(void)viewDidAppear:(BOOL)animated{

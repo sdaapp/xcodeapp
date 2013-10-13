@@ -13,6 +13,7 @@
 {
 
     IBOutlet UITextView *homeText;
+    __weak IBOutlet NSLayoutConstraint *homeTextBottomConstraint;
 }
 - (void)checkForWIFIConnection;
 
