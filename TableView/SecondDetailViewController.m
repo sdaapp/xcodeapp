@@ -48,6 +48,8 @@
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPlay target:self action:@selector(play)];
     self.navigationItem.rightBarButtonItem = addButton;
     addButton.tintColor = [UIColor colorWithRed:(25/255.0) green:(200/250.0) blue:(110/255.0) alpha:1];
+    
+    runnersInfoOriginalFrame = CGRectMake(0, 216, 320, 238);
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -209,6 +211,9 @@
         } else {
             runnersInfo.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 44 - 49 - 20); // In iOS 7; the navigation bar (44 points), tab bar (49 points) and status bar (20 points) are considered areas that can display content. Modifying the frame of the text view to not be blocked by any of these. 
         }
+    } else if (numberOfVideoLinks > 1) {
+        pickerView.hidden = NO;
+        runnersInfo.frame = runnersInfoOriginalFrame;
     }
     
     return numberOfVideoLinks;

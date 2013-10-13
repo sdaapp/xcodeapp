@@ -17,7 +17,7 @@
     IBOutlet UITextView *runnersInfo;
     IBOutlet UIPickerView *secondPicker;
     NSUInteger selectedRow;
-    
+    CGRect runnersInfoOriginalFrame;
 
 }
 @property (strong, nonatomic) UIView *myView;
