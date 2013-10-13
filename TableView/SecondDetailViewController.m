@@ -48,10 +48,11 @@
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPlay target:self action:@selector(play)];
     self.navigationItem.rightBarButtonItem = addButton;
     addButton.tintColor = [UIColor colorWithRed:(25/255.0) green:(200/250.0) blue:(110/255.0) alpha:1];
-    
-    
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [runnersInfo scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
+}
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
